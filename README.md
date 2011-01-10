@@ -1,4 +1,4 @@
-TODO: Write tests before solving anything else. Just do it.
+TODO: Write tests before solving anything else. Just do it already.
 
 # Ninety-Nine Prolog Problems
 

@@ -3,6 +3,8 @@
 
 :- module(problem_1_01, [my_last/2]).
 
+:- include('../common').
+
 my_last(X, [X]) :- !.
 my_last(X, [_|Xs]) :-
     my_last(X, Xs).

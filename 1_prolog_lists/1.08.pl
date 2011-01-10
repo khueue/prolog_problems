@@ -3,6 +3,8 @@
 
 :- module(problem_1_08, [compress/2, compress_v2/2]).
 
+:- include('../common').
+
 compress([], []).
 compress([X], [X]) :- !.
 compress([X,X|T], T2) :-
