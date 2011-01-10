@@ -1,4 +1,4 @@
-Ongoing process of solving the 99 Prolog problems at:
+Ongoing process of solving the "Ninety-Nine Prolog Problems" at:
 
 [http://sites.google.com/site/prologsite/prolog-problems/](http://sites.google.com/site/prologsite/prolog-problems/)
 
