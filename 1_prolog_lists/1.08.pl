@@ -35,7 +35,9 @@ compress([X,Y|T], [X|T2]) :-
 %   compress_v2(+List, ?Compressed)
 %
 %   Alternative implementation of compress/2 without as much redundant
-%   list consing. Same specification.
+%   list consing (this was at least somewhat important some time ago).
+%
+%   Same specification as compress/2.
 
 test(compress_v2/2,
     [ true
