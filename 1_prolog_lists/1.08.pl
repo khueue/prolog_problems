@@ -50,7 +50,7 @@ test(compress_v2/2,
     , compress_v2([a,a,a,b,b], [a,b])
     , compress_v2([a,a,a,b,b,a], [a,b,a])
     , compress_v2([a,a,a,b,b,a,a], [a,b,a])
-    , compress_v2([a,a,a,b,b,a,a], X), X = [a,b,a]
+    , compress_v2([a,a,a,b,b,a,a], X), X == [a,b,a]
     , one:compress_v2([a,a,a,b,b,a,a], _)
     ]).
 
