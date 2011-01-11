@@ -15,6 +15,7 @@ test(my_last/2,
     , my_last(a, [a])
     , my_last(b, [a,b])
     , my_last(c, [a,b,c])
+    , my_last(X, [a,b,c]), X = c
     , one:my_last(_, [a,b,c])
     ]).
 

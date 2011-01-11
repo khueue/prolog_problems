@@ -20,6 +20,7 @@ test(compress/2,
     , compress([a,a,a,b,b], [a,b])
     , compress([a,a,a,b,b,a], [a,b,a])
     , compress([a,a,a,b,b,a,a], [a,b,a])
+    , compress([a,a,a,b,b,a,a], X), X = [a,b,a]
     , one:compress([a,a,a,b,b,a,a], _)
     ]).
 
@@ -35,7 +36,7 @@ compress([X,Y|T], [X|T2]) :-
 %   compress_v2(+List, ?Compressed)
 %
 %   Alternative implementation of compress/2 without as much redundant
-%   list consing (this was at least somewhat important some time ago).
+%   list consing (this was at least somewhat important long ago).
 %
 %   Same specification as compress/2.
 
@@ -49,6 +50,7 @@ test(compress_v2/2,
     , compress_v2([a,a,a,b,b], [a,b])
     , compress_v2([a,a,a,b,b,a], [a,b,a])
     , compress_v2([a,a,a,b,b,a,a], [a,b,a])
+    , compress_v2([a,a,a,b,b,a,a], X), X = [a,b,a]
     , one:compress_v2([a,a,a,b,b,a,a], _)
     ]).
 
