@@ -15,7 +15,7 @@ test(last_but_one/2,
     , fail:last_but_one(_, [a])
     , last_but_one(a, [a,b])
     , last_but_one(b, [a,b,c])
-    , last_but_one(X, [a,b,c]), X = b
+    , last_but_one(X, [a,b,c]), X == b
     , one:last_but_one(_, [a,b,c])
     ]).
 

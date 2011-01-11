@@ -20,7 +20,7 @@ test(compress/2,
     , compress([a,a,a,b,b], [a,b])
     , compress([a,a,a,b,b,a], [a,b,a])
     , compress([a,a,a,b,b,a,a], [a,b,a])
-    , compress([a,a,a,b,b,a,a], X), X = [a,b,a]
+    , compress([a,a,a,b,b,a,a], X), X == [a,b,a]
     , one:compress([a,a,a,b,b,a,a], _)
     ]).
 
