@@ -5,7 +5,7 @@
 
 :- include('../common').
 
-%   last_but_one(?LastButOneElement, +List)
+%%  last_but_one(?LastButOneElement, +List)
 %
 %   True if LastButOneElement is the last but one element of List.
 

@@ -5,7 +5,7 @@
 
 :- include('../common').
 
-%   my_last(?LastElement, +List)
+%%  my_last(?LastElement, +List)
 %
 %   True if LastElement is the last element of List.
 

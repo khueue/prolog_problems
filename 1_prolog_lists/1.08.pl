@@ -5,7 +5,7 @@
 
 :- include('../common').
 
-%   compress(+List, ?Compressed)
+%%  compress(+List, ?Compressed)
 %
 %   True if Compressed is a compressed version of List such that all
 %   duplicate element sequences are compressed into only one element.
@@ -33,7 +33,7 @@ compress([X,Y|T], [X|T2]) :-
     % X \= Y,
     compress([Y|T], T2).
 
-%   compress_v2(+List, ?Compressed)
+%%  compress_v2(+List, ?Compressed)
 %
 %   Alternative implementation of compress/2 without as much redundant
 %   list consing (this was at least somewhat important long ago).
