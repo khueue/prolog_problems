@@ -22,7 +22,6 @@ test(my_reverse/2,
 my_reverse(List, Reversed) :-
     my_reverse(List, [], Reversed).
 
-% Tail-recursive helper.
 my_reverse([], Rev, Rev).
 my_reverse([X|Xs], Rev0, Rev) :-
     my_reverse(Xs, [X|Rev0], Rev).

@@ -22,7 +22,6 @@ test(my_length/2,
 my_length(List, Length) :-
     my_length(List, 0, Length).
 
-% Tail-recursive helper.
 my_length([], Len, Len).
 my_length([_|T], Len0, Len) :-
     Len1 is Len0 + 1,

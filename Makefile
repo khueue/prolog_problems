@@ -10,3 +10,7 @@ trim:
 run_tests:
 	clear
 	$(PROLOG) "[load], ['../crisp/lib/crisp'], crisp, halt"
+
+stay:
+	clear
+	$(PROLOG) "[load], ['../crisp/lib/crisp'], crisp"
