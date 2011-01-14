@@ -14,6 +14,7 @@ test(pack/2,
     [ true
     , pack([], [])
     , pack([a,a,a], [[a,a,a]])
+    , pack([a,a,a], P1), P1 == [[a,a,a]]
     , pack(
         [a,a,a,a,b,c,c,a,a,d,e,e,e,e],
         [[a,a,a,a],[b],[c,c],[a,a],[d],[e,e,e,e]])
