@@ -1,13 +1,16 @@
 %   Prolog Problems - Prolog Lists
 %   http://sites.google.com/site/prologsite/prolog-problems/1
 
-:- module(p1_07, [flatten/2, flatten_v2/2]).
+:- module(p1_07, [flatten/2, flatten2/2, flatten3/2]).
 
 :- include('../common').
 
 %%  flatten(+Tree, ?List)
 %
 %   True if List is Tree with all nesting removed.
+%
+%   ?- benchmark_total(10**6, flatten([[1,2],a,[b,[c,[d]]]], _), Time).
+%   Time = 3.86.
 
 test(flatten/2,
     [ true
@@ -32,6 +35,72 @@ flatten([X|Xs], [X|FlatXs]) :-
     % \+ looks_like_list(X),
     flatten(Xs, FlatXs).
 
+%%  flatten2(+Tree, ?List)
+%
+%   Alternative version of flatten that has no append.
+%   Same specification as flatten/2.
+%
+%   ?- benchmark_total(10**6, flatten2([[1,2],a,[b,[c,[d]]]], _), Time).
+%   Time = 2.74.
+
+test(flatten2/2,
+    [ true
+    , fail:flatten2([], [[]])
+    , flatten2([], [])
+    , flatten2([a], [a])
+    , flatten2([a,[]], [a])
+    , flatten2([a,[b]], [a,b])
+    , flatten2([[1,2],a,[b]], [1,2,a,b])
+    , flatten2([[1,2],a,[b,[c,[d]]]], [1,2,a,b,c,d])
+    , flatten2([[1,2],a,[b,[c,[d]]]], F1), F1 == [1,2,a,b,c,d]
+    , one:flatten2([[1,2],a,[b,[c,[d]]]], _)
+    ]).
+
+flatten2(List, Flat) :-
+    flatten2(List, [], Flat).
+
+flatten2([], Flat0, Flat) :-
+    !,
+    Flat0 = Flat. % Makes sure the first test goal passes.
+flatten2([X|Xs], Flat0, Flat) :-
+    !,
+    flatten2(X, FlatXs, Flat),
+    flatten2(Xs, Flat0, FlatXs).
+flatten2(X, Flat0, [X|Flat0]).
+    % \+ looks_like_list(X).
+
+%%  flatten3(+Tree, ?List)
+%
+%   Less hacky, at the expense of a looks_like_list/1 call.
+%   Same specification as flatten/2.
+%
+%   ?- benchmark_total(10**6, flatten3([[1,2],a,[b,[c,[d]]]], _), Time).
+%   Time = 3.55.
+
+test(flatten3/2,
+    [ true
+    , fail:flatten3([], [[]])
+    , flatten3([], [])
+    , flatten3([a], [a])
+    , flatten3([a,[]], [a])
+    , flatten3([a,[b]], [a,b])
+    , flatten3([[1,2],a,[b]], [1,2,a,b])
+    , flatten3([[1,2],a,[b,[c,[d]]]], [1,2,a,b,c,d])
+    , flatten3([[1,2],a,[b,[c,[d]]]], F1), F1 == [1,2,a,b,c,d]
+    , one:flatten3([[1,2],a,[b,[c,[d]]]], _)
+    ]).
+
+flatten3(List, Flat) :-
+    flatten3(List, [], Flat).
+
+flatten3([], Flat, Flat) :- !.
+flatten3([X|Xs], Flat0, Flat) :-
+    !,
+    flatten3(X, FlatXs, Flat),
+    flatten3(Xs, Flat0, FlatXs).
+flatten3(X, Flat0, [X|Flat0]) :-
+    \+ looks_like_list(X).
+
 %   looks_like_list(+List)
 %
 %   True if List "looks like" a list, meaning that it can be unified with
@@ -54,47 +123,3 @@ looks_like_list(0) :- % Catch variables.
     fail.
 looks_like_list([]).
 looks_like_list([_|_]).
-
-%%  flatten_v2(+Tree, ?List)
-%
-%   Alternative version of flatten that has no append.
-%
-%   Same specification as flatten/2.
-
-test(flatten_v2/2,
-    [ true
-    , fail:flatten_v2([], [[]])
-    , flatten_v2([], [])
-    , flatten_v2([a], [a])
-    , flatten_v2([a,[]], [a])
-    , flatten_v2([a,[b]], [a,b])
-    , flatten_v2([[1,2],a,[b]], [1,2,a,b])
-    , flatten_v2([[1,2],a,[b,[c,[d]]]], [1,2,a,b,c,d])
-    , flatten_v2([[1,2],a,[b,[c,[d]]]], F1), F1 == [1,2,a,b,c,d]
-    , one:flatten_v2([[1,2],a,[b,[c,[d]]]], _)
-    ]).
-
-flatten_v2(List, Flat) :-
-    flatten_v2(List, [], Flat).
-
-flatten_v2([], Flat0, Flat) :-
-    !,
-    Flat0 = Flat. % Makes sure the first test goal passes.
-flatten_v2([X|Xs], Flat0, Flat) :-
-    !,
-    flatten_v2(X, FlatXs, Flat),
-    flatten_v2(Xs, Flat0, FlatXs).
-flatten_v2(X, Flat0, [X|Flat0]).
-    % \+ looks_like_list(X).
-
-/* Less hacky, at the expense of a looks_like_list/1 call:
-
-flatten_v2([], Flat, Flat) :- !.
-flatten_v2([X|Xs], Flat0, Flat) :-
-    !,
-    flatten_v2(X, FlatXs, Flat),
-    flatten_v2(Xs, Flat0, FlatXs).
-flatten_v2(X, Flat0, [X|Flat0]) :-
-    \+ looks_like_list(X).
-
-*/

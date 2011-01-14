@@ -15,7 +15,7 @@ benchmark_total(N, Goal, Time) :-
     Time is Time1 - Time0.
 
 run_n_times(N, Goal) :-
-    N1 is N, % So that we can say: 10**6
+    N1 is N, % So that we can pass 10**6.
     between(1, N1, _),
     Goal,
     fail.

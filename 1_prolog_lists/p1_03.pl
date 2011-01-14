@@ -21,7 +21,7 @@ test(element_at/3,
     , one:element_at(_, [a,b,c], 2)
     ]).
 
-element_at(X, [X|_], 1) :- !.
+element_at(X, [X|_], 1).
 element_at(X, [_|Xs], N) :-
     N > 1,
     N1 is N - 1,
