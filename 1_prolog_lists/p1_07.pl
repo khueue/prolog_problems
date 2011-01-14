@@ -1,36 +1,36 @@
 %   Prolog Problems - Prolog Lists
 %   http://sites.google.com/site/prologsite/prolog-problems/1
 
-:- module(p1_07, [my_flatten/2, my_flatten_v2/2]).
+:- module(p1_07, [flatten/2, flatten_v2/2]).
 
 :- include('../common').
 
-%%  my_flatten(+List, ?FlatList)
+%%  flatten(+Tree, ?List)
 %
-%   True if FlatList is List with all nesting removed.
+%   True if List is Tree with all nesting removed.
 
-test(my_flatten/2,
+test(flatten/2,
     [ true
-    , my_flatten([], [])
-    , my_flatten([a], [a])
-    , my_flatten([a,[]], [a])
-    , my_flatten([a,[b]], [a,b])
-    , my_flatten([[1,2],a,[b]], [1,2,a,b])
-    , my_flatten([[1,2],a,[b,[c,[d]]]], [1,2,a,b,c,d])
-    , my_flatten([[1,2],a,[b,[c,[d]]]], F1), F1 == [1,2,a,b,c,d]
-    , one:my_flatten([[1,2],a,[b,[c,[d]]]], _)
+    , flatten([], [])
+    , flatten([a], [a])
+    , flatten([a,[]], [a])
+    , flatten([a,[b]], [a,b])
+    , flatten([[1,2],a,[b]], [1,2,a,b])
+    , flatten([[1,2],a,[b,[c,[d]]]], [1,2,a,b,c,d])
+    , flatten([[1,2],a,[b,[c,[d]]]], F1), F1 == [1,2,a,b,c,d]
+    , one:flatten([[1,2],a,[b,[c,[d]]]], _)
     ]).
 
-my_flatten([], []).
-my_flatten([X|Xs], Flat) :-
+flatten([], []).
+flatten([X|Xs], Flat) :-
     looks_like_list(X),
     !,
-    my_flatten(X, FlatX),
-    my_flatten(Xs, FlatXs),
+    flatten(X, FlatX),
+    flatten(Xs, FlatXs),
     append(FlatX, FlatXs, Flat). % SWI built-in.
-my_flatten([X|Xs], [X|FlatXs]) :-
+flatten([X|Xs], [X|FlatXs]) :-
     % \+ looks_like_list(X),
-    my_flatten(Xs, FlatXs).
+    flatten(Xs, FlatXs).
 
 %   looks_like_list(+List)
 %
@@ -55,34 +55,34 @@ looks_like_list(0) :- % Catch variables.
 looks_like_list([]).
 looks_like_list([_|_]).
 
-%%  my_flatten_v2(+List, ?FlatList)
+%%  flatten_v2(+Tree, ?List)
 %
 %   Alternative version of flatten that has no append.
 %
-%   Same specification as my_flatten/2.
+%   Same specification as flatten/2.
 
-test(my_flatten_v2/2,
+test(flatten_v2/2,
     [ true
-    , fail:my_flatten_v2([], [[]])
-    , my_flatten_v2([], [])
-    , my_flatten_v2([a], [a])
-    , my_flatten_v2([a,[]], [a])
-    , my_flatten_v2([a,[b]], [a,b])
-    , my_flatten_v2([[1,2],a,[b]], [1,2,a,b])
-    , my_flatten_v2([[1,2],a,[b,[c,[d]]]], [1,2,a,b,c,d])
-    , my_flatten_v2([[1,2],a,[b,[c,[d]]]], F1), F1 == [1,2,a,b,c,d]
-    , one:my_flatten_v2([[1,2],a,[b,[c,[d]]]], _)
+    , fail:flatten_v2([], [[]])
+    , flatten_v2([], [])
+    , flatten_v2([a], [a])
+    , flatten_v2([a,[]], [a])
+    , flatten_v2([a,[b]], [a,b])
+    , flatten_v2([[1,2],a,[b]], [1,2,a,b])
+    , flatten_v2([[1,2],a,[b,[c,[d]]]], [1,2,a,b,c,d])
+    , flatten_v2([[1,2],a,[b,[c,[d]]]], F1), F1 == [1,2,a,b,c,d]
+    , one:flatten_v2([[1,2],a,[b,[c,[d]]]], _)
     ]).
 
-my_flatten_v2(List, Flat) :-
-    my_flatten_v2(List, [], Flat).
+flatten_v2(List, Flat) :-
+    flatten_v2(List, [], Flat).
 
-my_flatten_v2([], Flat0, Flat) :-
+flatten_v2([], Flat0, Flat) :-
     !,
     Flat0 = Flat. % Makes sure the first test goal succeeds.
-my_flatten_v2([X|Xs], Flat0, Flat) :-
+flatten_v2([X|Xs], Flat0, Flat) :-
     !,
-    my_flatten_v2(X, FlatXs, Flat),
-    my_flatten_v2(Xs, Flat0, FlatXs).
-my_flatten_v2(X, Flat0, [X|Flat0]).
+    flatten_v2(X, FlatXs, Flat),
+    flatten_v2(Xs, Flat0, FlatXs).
+flatten_v2(X, Flat0, [X|Flat0]).
     % \+ looks_like_list(X).
