@@ -79,10 +79,22 @@ flatten_v2(List, Flat) :-
 
 flatten_v2([], Flat0, Flat) :-
     !,
-    Flat0 = Flat. % Makes sure the first test goal succeeds.
+    Flat0 = Flat. % Makes sure the first test goal passes.
 flatten_v2([X|Xs], Flat0, Flat) :-
     !,
     flatten_v2(X, FlatXs, Flat),
     flatten_v2(Xs, Flat0, FlatXs).
 flatten_v2(X, Flat0, [X|Flat0]).
     % \+ looks_like_list(X).
+
+/* Less hacky, at the expense of a looks_like_list/1 call:
+
+flatten_v2([], Flat, Flat) :- !.
+flatten_v2([X|Xs], Flat0, Flat) :-
+    !,
+    flatten_v2(X, FlatXs, Flat),
+    flatten_v2(Xs, Flat0, FlatXs).
+flatten_v2(X, Flat0, [X|Flat0]) :-
+    \+ looks_like_list(X).
+
+*/
