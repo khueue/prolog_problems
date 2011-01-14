@@ -5,3 +5,5 @@
 :- use_module('5_multiway_trees/*').
 :- use_module('6_graphs/*').
 :- use_module('7_miscellaneous/*').
+
+:- use_module(benchmark).
