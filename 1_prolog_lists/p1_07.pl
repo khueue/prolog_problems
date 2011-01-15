@@ -10,7 +10,7 @@
 %   True if List is Tree with all nesting removed.
 %
 %   ?- bench_total(10**6, flatten([[1,2],a,[b,[c,[d]]]], _), Time).
-%   Time = 3.86.
+%   Time = 3.82.
 
 describe(flatten/2,
     [ true
@@ -30,10 +30,29 @@ flatten([X|Xs], Flat) :-
     !,
     flatten(X, FlatX),
     flatten(Xs, FlatXs),
-    append(FlatX, FlatXs, Flat). % SWI built-in.
+    my_append(FlatX, FlatXs, Flat).
 flatten([X|Xs], [X|FlatXs]) :-
     % \+ looks_like_list(X),
     flatten(Xs, FlatXs).
+
+%   my_append(+List1, +List2, ?List1List2)
+%   my_append(?List1, ?List2, +List1List2)
+%
+%   True if List1List2 is the list concatenation of List1 and List2.
+
+describe(my_append/3,
+    [ true
+    , my_append([], [], [])
+    , my_append([a,b,c], [], [a,b,c])
+    , my_append([], [a,b,c], [a,b,c])
+    , my_append([a,b,c], [d,e], [a,b,c,d,e])
+    , my_append([a,b,c], [d,e], L1), L1 == [a,b,c,d,e]
+    , one:my_append([a,b,c], [d,e], _)
+    ]).
+
+my_append([], L, L).
+my_append([X|T1], L2, [X|T3]) :-
+    my_append(T1, L2, T3).
 
 %%  flatten2(+Tree, ?List)
 %

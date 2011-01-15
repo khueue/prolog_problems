@@ -1,5 +1,7 @@
 %   Simple benchmarking utility.
 %
+%   Currently only works with SWI-Prolog.
+%
 %   Example: bench_total(10**7, member(3, [1,2,3]), Time).
 
 :- module(benchmark, [bench_average/3, bench_total/3]).
@@ -27,7 +29,7 @@ bench_total(N, Goal, Time) :-
     Time is Time1 - Time0.
 
 run_n_times(N, Goal) :-
-    M is N, % So that we can pass 10**6.
+    M is integer(N), % So that we can pass 10**6.
     between(1, M, _),
     call(Goal),
     fail.
