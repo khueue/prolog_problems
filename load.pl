@@ -1,3 +1,4 @@
+% Only SWI seems to recognize wildcard paths. Pity.
 :- use_module('1_prolog_lists/*').
 :- use_module('2_arithmetic/*').
 :- use_module('3_logic_and_codes/*').
