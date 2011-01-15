@@ -10,7 +10,7 @@
 %
 %   True if AvgTime is the average time in seconds (float) it takes to
 %   execute Goal. Executes it N times and divides the total time by N.
-%   N will be evaluated by 'is', so that we can give it e.g. 10**6.
+%   N will be evaluated by is/2, so that we can give it e.g. 10**6.
 
 bench_average(N, Goal, AvgTime) :-
     bench_total(N, Goal, Time),
@@ -20,7 +20,7 @@ bench_average(N, Goal, AvgTime) :-
 %
 %   True if TotalTime is the total time in seconds (float) it takes to
 %   execute Goal N times.
-%   N will be evaluated by 'is', so that we can give it e.g. 10**6.
+%   N will be evaluated by is/2, so that we can give it e.g. 10**6.
 
 bench_total(N, Goal, Time) :-
     statistics(cputime, Time0),
