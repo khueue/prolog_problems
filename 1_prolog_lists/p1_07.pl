@@ -56,8 +56,8 @@ test(flatten2/2,
     , one:flatten2([[1,2],a,[b,[c,[d]]]], _)
     ]).
 
-flatten2(List, Flat) :-
-    flatten2(List, [], Flat).
+flatten2(Tree, Flat) :-
+    flatten2(Tree, [], Flat).
 
 flatten2([], Flat0, Flat) :-
     !,
@@ -90,8 +90,8 @@ test(flatten3/2,
     , one:flatten3([[1,2],a,[b,[c,[d]]]], _)
     ]).
 
-flatten3(List, Flat) :-
-    flatten3(List, [], Flat).
+flatten3(Tree, Flat) :-
+    flatten3(Tree, [], Flat).
 
 flatten3([], Flat, Flat) :- !.
 flatten3([X|Xs], Flat0, Flat) :-
