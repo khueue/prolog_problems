@@ -9,7 +9,7 @@
 %
 %   True if LastButOneElement is the last but one element of List.
 
-test(last_but_one/2,
+describe(last_but_one/2,
     [ true
     , fail:last_but_one(_, [])
     , fail:last_but_one(_, [a])

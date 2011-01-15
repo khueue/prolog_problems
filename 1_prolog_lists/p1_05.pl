@@ -9,7 +9,7 @@
 %
 %   True if Reversed is List in reverse order.
 
-test(my_reverse/2,
+describe(my_reverse/2,
     [ true
     , my_reverse([], [])
     , my_reverse([a], [a])

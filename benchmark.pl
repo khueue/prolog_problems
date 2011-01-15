@@ -1,22 +1,34 @@
-% Simple benchmark utility.
+%   Simple benchmarking utility.
 %
-% Example: benchmark_total(10**7, member(3, [1,2,3]), Time).
+%   Example: bench_total(10**7, member(3, [1,2,3]), Time).
 
-:- module(benchmark, [benchmark_average/3, benchmark_total/3]).
+:- module(benchmark, [bench_average/3, bench_total/3]).
 
-benchmark_average(N, Goal, AvgTime) :-
-    benchmark_total(N, Goal, Time),
+%%  bench_average(+N, +Goal, -AvgTime)
+%
+%   True if AvgTime is the average time in seconds (float) it takes to
+%   execute Goal. Executes it N times and divides the total time by N.
+%   N will be evaluated by 'is', so that we can give it e.g. 10**6.
+
+bench_average(N, Goal, AvgTime) :-
+    bench_total(N, Goal, Time),
     AvgTime is Time / N.
 
-benchmark_total(N, Goal, Time) :-
+%%  bench_total(+N, +Goal, -TotalTime)
+%
+%   True if TotalTime is the total time in seconds (float) it takes to
+%   execute Goal N times.
+%   N will be evaluated by 'is', so that we can give it e.g. 10**6.
+
+bench_total(N, Goal, Time) :-
     statistics(cputime, Time0),
     run_n_times(N, Goal),
     statistics(cputime, Time1),
     Time is Time1 - Time0.
 
 run_n_times(N, Goal) :-
-    N1 is N, % So that we can pass 10**6.
-    between(1, N1, _),
-    Goal,
+    M is N, % So that we can pass 10**6.
+    between(1, M, _),
+    call(Goal),
     fail.
 run_n_times(_, _).

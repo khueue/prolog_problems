@@ -9,7 +9,7 @@
 %
 %   True if Length is the number of elements in List.
 
-test(my_length/2,
+describe(my_length/2,
     [ true
     , my_length([], 0)
     , my_length([_], 1)

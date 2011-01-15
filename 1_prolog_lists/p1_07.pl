@@ -9,10 +9,10 @@
 %
 %   True if List is Tree with all nesting removed.
 %
-%   ?- benchmark_total(10**6, flatten([[1,2],a,[b,[c,[d]]]], _), Time).
+%   ?- bench_total(10**6, flatten([[1,2],a,[b,[c,[d]]]], _), Time).
 %   Time = 3.86.
 
-test(flatten/2,
+describe(flatten/2,
     [ true
     , flatten([], [])
     , flatten([a], [a])
@@ -40,10 +40,10 @@ flatten([X|Xs], [X|FlatXs]) :-
 %   Alternative version of flatten that has no append.
 %   Same specification as flatten/2.
 %
-%   ?- benchmark_total(10**6, flatten2([[1,2],a,[b,[c,[d]]]], _), Time).
+%   ?- bench_total(10**6, flatten2([[1,2],a,[b,[c,[d]]]], _), Time).
 %   Time = 2.74.
 
-test(flatten2/2,
+describe(flatten2/2,
     [ true
     , fail:flatten2([], [[]])
     , flatten2([], [])
@@ -74,10 +74,10 @@ flatten2(X, Flat0, [X|Flat0]).
 %   Less hacky, at the expense of a looks_like_list/1 call.
 %   Same specification as flatten/2.
 %
-%   ?- benchmark_total(10**6, flatten3([[1,2],a,[b,[c,[d]]]], _), Time).
+%   ?- bench_total(10**6, flatten3([[1,2],a,[b,[c,[d]]]], _), Time).
 %   Time = 3.55.
 
-test(flatten3/2,
+describe(flatten3/2,
     [ true
     , fail:flatten3([], [[]])
     , flatten3([], [])
@@ -108,7 +108,7 @@ flatten3(X, Flat0, [X|Flat0]) :-
 %   that the list is well-formed (unlike the SWI built-in, is_list/1,
 %   which recursively checks the entire list).
 
-test(looks_like_list/1,
+describe(looks_like_list/1,
     [ true
     , fail:looks_like_list(_)
     , fail:looks_like_list(a)

@@ -7,9 +7,9 @@
 
 %%  element_at(?X, +List, +Index)
 %
-%   True if X is the element at Index (1-based) in List.
+%   True if X is the element at 1-based Index in List.
 
-test(element_at/3,
+describe(element_at/3,
     [ true
     , fail:element_at(_, [a,b,c], -1)
     , fail:element_at(_, [a,b,c], 0)

@@ -10,10 +10,10 @@
 %   True if Groups is a list of lists, where the lists contain the
 %   consecutive duplicates of List.
 %
-%   ?- benchmark_total(10**6, pack([a,a,a,b,b,c,d,d,d,d], _), Time).
+%   ?- bench_total(10**6, pack([a,a,a,b,b,c,d,d,d,d], _), Time).
 %   Time = 2.82.
 
-test(pack/2,
+describe(pack/2,
     [ true
     , pack([], [])
     , pack([a,a,a], [[a,a,a]])
@@ -40,10 +40,10 @@ pack([X,Y|Xs], Group0, [[X|Group0]|Groups]) :-
 %   Extra argument in the helper to avoid unnecessary consing.
 %   Same specification as pack/2.
 %
-%   ?- benchmark_total(10**6, pack2([a,a,a,b,b,c,d,d,d,d], _), Time).
+%   ?- bench_total(10**6, pack2([a,a,a,b,b,c,d,d,d,d], _), Time).
 %   Time = 2.11.
 
-test(pack2/2,
+describe(pack2/2,
     [ true
     , pack2([], [])
     , pack2([a,a,a], [[a,a,a]])
@@ -70,10 +70,10 @@ pack2([Y|Xs], X, Group0, [[X|Group0]|Groups]) :-
 %   Naive version using body recursion. Just for fun.
 %   Same specification as pack/2.
 %
-%   ?- benchmark_total(10**6, pack3([a,a,a,b,b,c,d,d,d,d], _), Time).
+%   ?- bench_total(10**6, pack3([a,a,a,b,b,c,d,d,d,d], _), Time).
 %   Time = 12.02.
 
-test(pack3/2,
+describe(pack3/2,
     [ true
     , pack3([], [])
     , pack3([a,a,a], [[a,a,a]])

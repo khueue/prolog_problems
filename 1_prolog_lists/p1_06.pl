@@ -11,7 +11,7 @@
 %
 %   True if List is a palindrome.
 
-test(is_palindrome/1,
+describe(is_palindrome/1,
     [ true
     , is_palindrome([])
     , is_palindrome([a])

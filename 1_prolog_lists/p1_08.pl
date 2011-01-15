@@ -10,7 +10,7 @@
 %   True if Compressed is a compressed version of List such that all
 %   duplicate element sequences are compressed into only one element.
 
-test(compress/2,
+describe(compress/2,
     [ true
     , compress([], [])
     , compress([a], [a])
@@ -40,7 +40,7 @@ compress([X,Y|T], [X|T2]) :-
 %
 %   Same specification as compress/2.
 
-test(compress_v2/2,
+describe(compress_v2/2,
     [ true
     , compress_v2([], [])
     , compress_v2([a], [a])

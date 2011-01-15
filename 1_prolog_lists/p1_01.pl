@@ -9,7 +9,7 @@
 %
 %   True if LastElement is the last element of List.
 
-test(my_last/2,
+describe(my_last/2,
     [ true
     , fail:my_last(_, [])
     , my_last(a, [a])
