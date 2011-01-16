@@ -7,8 +7,8 @@
 
 %%  pack(+List, ?Groups)
 %
-%   True if Groups is a list of lists, where the lists contain the
-%   consecutive duplicates of List.
+%   True if Group is a list of lists, where each list contains the
+%   next consecutive duplicate sequence in List.
 %
 %   ?- bench_total(10**6, pack([a,a,a,b,b,c,d,d,d,d], _), Time).
 %   Time = 2.82.
@@ -21,6 +21,7 @@ describe(pack/2,
     , pack(
         [a,a,a,a,b,c,c,a,a,d,e,e,e,e],
         [[a,a,a,a],[b],[c,c],[a,a],[d],[e,e,e,e]])
+    , one:pack([a,a,a,a,b,c,c,a,a,d,e,e,e,e], _)
     ]).
 
 pack(List, Groups) :-
@@ -51,6 +52,7 @@ describe(pack2/2,
     , pack2(
         [a,a,a,a,b,c,c,a,a,d,e,e,e,e],
         [[a,a,a,a],[b],[c,c],[a,a],[d],[e,e,e,e]])
+    , one:pack2([a,a,a,a,b,c,c,a,a,d,e,e,e,e], _)
     ]).
 
 pack2([], []).
@@ -81,6 +83,7 @@ describe(pack3/2,
     , pack3(
         [a,a,a,a,b,c,c,a,a,d,e,e,e,e],
         [[a,a,a,a],[b],[c,c],[a,a],[d],[e,e,e,e]])
+    , one:pack2([a,a,a,a,b,c,c,a,a,d,e,e,e,e], _)
     ]).
 
 pack3([], []).
