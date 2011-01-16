@@ -11,7 +11,7 @@
 %
 %   True if Encoding is a list of lists, where each list contains the
 %   next consecutive duplicate sequence in List, reduced to only the
-%   number of duplicates and a single instance of the value. 
+%   number of duplicates and a single instance of the value.
 
 describe(encode/2,
     [ true

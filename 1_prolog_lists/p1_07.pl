@@ -1,7 +1,7 @@
 %   Prolog Problems - Prolog Lists
 %   http://sites.google.com/site/prologsite/prolog-problems/1
 
-:- module(p1_07, [flatten/2, flatten2/2, flatten3/2]).
+:- module(p1_07, [flatten/2, flatten2/2, flatten3/2, flatten4/2]).
 
 :- include('../common').
 
@@ -119,6 +119,38 @@ flatten3([X|Xs], Flat0, Flat) :-
     flatten3(Xs, Flat0, FlatXs).
 flatten3(X, Flat0, [X|Flat0]) :-
     \+ looks_like_list(X).
+
+%%  flatten4(+Tree, ?List)
+%
+%   Implemented using Definite Clause Grammar (DCG).
+%   Same specification as flatten/2.
+%
+%   ?- bench_total(10**6, flatten4([[1,2],a,[b,[c,[d]]]], _), Time).
+%   Time = 3.13.
+
+describe(flatten4/2,
+    [ true
+    , fail:flatten4([], [[]])
+    , flatten4([], [])
+    , flatten4([a], [a])
+    , flatten4([a,[]], [a])
+    , flatten4([a,[b]], [a,b])
+    , flatten4([[1,2],a,[b]], [1,2,a,b])
+    , flatten4([[1,2],a,[b,[c,[d]]]], [1,2,a,b,c,d])
+    , flatten4([[1,2],a,[b,[c,[d]]]], F1), F1 == [1,2,a,b,c,d]
+    , one:flatten4([[1,2],a,[b,[c,[d]]]], _)
+    , onedet:flatten4([[1,2],a,[b,[c,[d]]]], _)
+    ]).
+
+flatten4(Tree, List) :-
+    flatten4(Tree, List, []).
+
+flatten4([X|Xs]) -->
+    !,
+    flatten4(X),
+    flatten4(Xs).
+flatten4([]) --> !, [].
+flatten4(X) --> [X].
 
 %   looks_like_list(+List)
 %
